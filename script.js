@@ -18,7 +18,7 @@ const repositories = createTag('ul', 'repositories');
 container.append(input, autocomplete, repositories);
 
 
-let debounceTimer;
+let timerId;
 
 input.addEventListener('input', (e) => {
    const query = e.target.value;
@@ -26,8 +26,8 @@ input.addEventListener('input', (e) => {
    if (query === '') {
       autocomplete.textContent = '';
    } else {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(() => {
+      clearTimeout(timerId);
+      timerId = setTimeout(() => {
          searchRepositories(query);
       }, 300);
    }
