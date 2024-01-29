@@ -13,7 +13,7 @@ const container = document.querySelector('.container');
 const input = createTag('input', 'search');
 input.setAttribute('type', 'text');
 
-const autocomplete = createTag('div', 'autocomplete');
+const autocomplete = createTag('ul', 'autocomplete');
 const repositories = createTag('ul', 'repositories');
 container.append(input, autocomplete, repositories);
 
@@ -21,7 +21,7 @@ container.append(input, autocomplete, repositories);
 let timerId;
 
 input.addEventListener('input', (e) => {
-   const query = e.target.value;
+   const query = e.target.value.trim();
    console.log(query);
    if (query === '') {
       autocomplete.textContent = '';
@@ -29,19 +29,19 @@ input.addEventListener('input', (e) => {
       clearTimeout(timerId);
       timerId = setTimeout(() => {
          searchRepositories(query);
-      }, 300);
+      }, 1000);
    }
-})
-
+});
 
 function searchRepositories(query) {
+   if (typeof query !== 'string' || query.trim() === '') return;
    fetch(`https://api.github.com/search/repositories?q=${query}`)
       .then(response => response.json())
       .then(data => {
          const repos = data.items.slice(0, 5);
          autocomplete.textContent = '';
          repos.forEach(repo => {
-            const listItem = createTag('div', 'text');
+            const listItem = createTag('li', 'text');
             listItem.textContent = repo.full_name;
             listItem.addEventListener('click', () => {
                addRepository(repo);

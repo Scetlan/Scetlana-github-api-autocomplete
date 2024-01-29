@@ -1,5 +1,6 @@
 ul {
    padding: 0;
+   margin: 0;
 }
 
 .container {
@@ -43,6 +44,10 @@ li {
 .text:hover,
 .text:focus {
    background-color:#65CDF9;
+}
+
+.repositories {
+   margin-top: 40px;
 }
 
 .item {
