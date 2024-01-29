@@ -21,8 +21,7 @@ container.append(input, autocomplete, repositories);
 let timerId;
 
 input.addEventListener('input', (e) => {
-   const query = e.target.value.trim();
-   console.log(query);
+   const query = e.target.value;
    if (query === '') {
       autocomplete.textContent = '';
    } else {
